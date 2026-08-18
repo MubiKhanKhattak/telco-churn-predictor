@@ -229,22 +229,56 @@ st.html("""
 
 
 with st.sidebar:
-    st.header(":material/info: About")
+    st.html("""
+    <div style="background:linear-gradient(135deg,#6366F1,#8B5CF6);border-radius:12px;padding:1.2rem 1rem;margin-bottom:1rem;color:white;">
+        <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:1px;opacity:0.8;margin-bottom:0.3rem;">Model status</div>
+        <div style="font-size:1rem;font-weight:600;">""" + model_source + """</div>
+    </div>
+    """)
+
+    st.markdown("#### :material/info: About")
     st.write(
-        "This tool is a decision-support signal for retention teams, not an automatic decision."
-    )
-    st.success(f":material/check_circle: Model status: {model_source}")
-    st.markdown(
-        """**Risk guidance**
-- :red-badge[High] 60% or more
-- :orange-badge[Medium] 35% - 59%
-- :green-badge[Low] Below 35%"""
+        "A decision-support signal for retention teams — not an automatic decision."
     )
 
     st.markdown("---")
-    st.markdown("**:material/link: Quick links**")
-    st.markdown("[GitHub repo](https://github.com/MubiKhanKhattak/telco-churn-predictor)")
-    st.markdown("[Live app](https://telco-churn-predictor.streamlit.app)")
+
+    st.markdown("#### :material/gauge: Risk guidance")
+    st.html("""
+    <div style="display:flex;flex-direction:column;gap:0.5rem;">
+        <div style="display:flex;align-items:center;gap:0.6rem;background:#FEF2F2;border-radius:8px;padding:0.6rem 0.8rem;">
+            <span style="font-size:1.1rem;">&#9888;</span>
+            <div><strong style="color:#DC2626;">High</strong><br><span style="font-size:0.8rem;color:#6B7280;">60% or more</span></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.6rem;background:#FFFBEB;border-radius:8px;padding:0.6rem 0.8rem;">
+            <span style="font-size:1.1rem;">&#9888;</span>
+            <div><strong style="color:#D97706;">Medium</strong><br><span style="font-size:0.8rem;color:#6B7280;">35% - 59%</span></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.6rem;background:#F0FDF4;border-radius:8px;padding:0.6rem 0.8rem;">
+            <span style="font-size:1.1rem;">&#10003;</span>
+            <div><strong style="color:#16A34A;">Low</strong><br><span style="font-size:0.8rem;color:#6B7280;">Below 35%</span></div>
+        </div>
+    </div>
+    """)
+
+    st.markdown("---")
+
+    st.markdown("#### :material/lightbulb: Tips")
+    st.info("Use realistic values for best predictions. Extreme charges with short tenure often signal high risk.")
+
+    st.markdown("---")
+
+    st.markdown("#### :material/link: Quick links")
+    st.html("""
+    <div style="display:flex;flex-direction:column;gap:0.4rem;">
+        <a href="https://github.com/MubiKhanKhattak/telco-churn-predictor" target="_blank" style="display:flex;align-items:center;gap:0.5rem;padding:0.5rem 0.8rem;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;text-decoration:none;color:#1E293B;font-size:0.9rem;transition:all 0.2s;">
+            &#128279; GitHub repo
+        </a>
+        <a href="https://telco-churn-predictor.streamlit.app" target="_blank" style="display:flex;align-items:center;gap:0.5rem;padding:0.5rem 0.8rem;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;text-decoration:none;color:#1E293B;font-size:0.9rem;transition:all 0.2s;">
+            &#127760; Live app
+        </a>
+    </div>
+    """)
 
 
 tab_predict, tab_how, tab_docs = st.tabs(
