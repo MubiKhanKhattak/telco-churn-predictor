@@ -451,8 +451,6 @@ tab_predict, tab_how, tab_docs = st.tabs(
 
 
 with tab_predict:
-    st.html('<div class="section-badge">✎ ENTER CUSTOMER DETAILS</div>')
-
     sc1, sc2 = st.columns(2)
     with sc1:
         st.html("""
@@ -474,6 +472,7 @@ with tab_predict:
         """)
 
     st.space("small")
+    st.html('<div class="section-badge">✎ ENTER CUSTOMER DETAILS</div>')
 
     left, right = st.columns(2)
 
