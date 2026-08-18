@@ -4,7 +4,7 @@ An interactive Streamlit web app that predicts whether a telecom customer will c
 
 ## Live Demo
 
-**[Try the app live](https://YOUR_USERNAME-telco-churn-predictor.streamlit.app)** *(update this link after deploying)*
+**[Try the app live](https://telco-churn-predictor.streamlit.app)**
 
 ## Screenshots
 
@@ -37,7 +37,7 @@ An interactive Streamlit web app that predicts whether a telecom customer will c
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/telco-churn-predictor.git
+   git clone https://github.com/MubiKhanKhattak/telco-churn-predictor.git
    cd telco-churn-predictor
    ```
 
