@@ -451,7 +451,7 @@ tab_predict, tab_how, tab_docs = st.tabs(
 
 
 with tab_predict:
-    st.html('<div class="section-badge">:material/edit: ENTER CUSTOMER DETAILS</div>')
+    st.html('<div class="section-badge">✎ ENTER CUSTOMER DETAILS</div>')
 
     sc1, sc2 = st.columns(2)
     with sc1:
@@ -545,18 +545,18 @@ with tab_predict:
         percentage = probability * 100
 
         if probability >= 0.60:
-            level, icon, message, css_class = "High", ":material/warning:", "Prioritize this customer for retention outreach and a tailored offer.", "risk-high"
+            level, icon, message, css_class = "High", "⚠", "Prioritize this customer for retention outreach and a tailored offer.", "risk-high"
         elif probability >= 0.35:
-            level, icon, message, css_class = "Medium", ":material/info:", "Consider proactive outreach, especially if the customer has recently contacted support.", "risk-medium"
+            level, icon, message, css_class = "Medium", "ℹ", "Consider proactive outreach, especially if the customer has recently contacted support.", "risk-medium"
         else:
-            level, icon, message, css_class = "Low", ":material/check_circle:", "No immediate retention action is indicated by this model.", "risk-low"
+            level, icon, message, css_class = "Low", "✓", "No immediate retention action is indicated by this model.", "risk-low"
 
         st.space("medium")
 
         st.html(f"""
         <div class="{css_class}">
             <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.8rem;">
-                <span class="float-icon">{icon.replace(':material/', '').replace(':', '')}</span>
+                <span class="float-icon">{icon}</span>
                 <h3 style="margin:0;">{level} churn risk</h3>
             </div>
             <div style="display:flex;gap:2rem;align-items:center;flex-wrap:wrap;">
@@ -576,39 +576,39 @@ with tab_predict:
 
 
 with tab_how:
-    st.html('<div class="section-badge">:material/science: MODEL EXPLAINED</div>')
+    st.html('<div class="section-badge">⚙ MODEL EXPLAINED</div>')
     st.subheader("How the model works")
 
     st.html("""
     <div class="pipeline-step fade-in">
-        <h4 style="margin:0 0 0.5rem 0;color:#6366F1;">:material/input: Step 1: Raw customer data</h4>
+        <h4 style="margin:0 0 0.5rem 0;color:#6366F1;">📥 Step 1: Raw customer data</h4>
         <p style="margin:0;color:#475569;">18 customer attributes are collected: profile info, services, and billing details.</p>
     </div>
-    <div class="flow-arrow">:material/arrow_downward:</div>
+    <div class="flow-arrow">⬇</div>
     <div class="pipeline-step fade-in fade-in-delay-1">
-        <h4 style="margin:0 0 0.5rem 0;color:#6366F1;">:material/build: Step 2: Preprocessing</h4>
+        <h4 style="margin:0 0 0.5rem 0;color:#6366F1;">🔧 Step 2: Preprocessing</h4>
         <p style="margin:0;color:#475569;">Missing values are imputed (median for numeric, most frequent for categorical). Numeric features are standardized. Categorical features are one-hot encoded.</p>
     </div>
-    <div class="flow-arrow">:material/arrow_downward:</div>
+    <div class="flow-arrow">⬇</div>
     <div class="pipeline-step fade-in fade-in-delay-2">
-        <h4 style="margin:0 0 0.5rem 0;color:#6366F1;">:material/smart_toy: Step 3: Model training</h4>
+        <h4 style="margin:0 0 0.5rem 0;color:#6366F1;">🤖 Step 3: Model training</h4>
         <p style="margin:0;color:#475569;">Logistic Regression with balanced class weights learns the relationship between features and churn. Random Forest is also compared as an alternative.</p>
     </div>
-    <div class="flow-arrow">:material/arrow_downward:</div>
+    <div class="flow-arrow">⬇</div>
     <div class="pipeline-step fade-in fade-in-delay-3">
-        <h4 style="margin:0 0 0.5rem 0;color:#6366F1;">:material/bar_chart: Step 4: Evaluation</h4>
+        <h4 style="margin:0 0 0.5rem 0;color:#6366F1;">📊 Step 4: Evaluation</h4>
         <p style="margin:0;color:#475569;">The best model is selected by ROC-AUC. Classification report, confusion matrix, and ROC curve validate performance on unseen data.</p>
     </div>
-    <div class="flow-arrow">:material/arrow_downward:</div>
+    <div class="flow-arrow">⬇</div>
     <div class="pipeline-step fade-in fade-in-delay-4">
-        <h4 style="margin:0 0 0.5rem 0;color:#6366F1;">:material/send: Step 5: Prediction</h4>
+        <h4 style="margin:0 0 0.5rem 0;color:#6366F1;">🚀 Step 5: Prediction</h4>
         <p style="margin:0;color:#475569;">The trained pipeline scores new customers and outputs a churn probability with a risk level for the retention team.</p>
     </div>
     """)
 
     st.space("large")
 
-    st.html('<div class="section-badge">:material/analytics: KEY NUMBERS</div>')
+    st.html('<div class="section-badge">📈 KEY NUMBERS</div>')
     st.subheader("Project at a glance")
 
     c1, c2, c3, c4 = st.columns(4)
@@ -660,7 +660,7 @@ with tab_how:
 
 
 with tab_docs:
-    st.html('<div class="section-badge">:material/article: FULL DOCS</div>')
+    st.html('<div class="section-badge">📄 FULL DOCS</div>')
     st.subheader("Documentation")
 
     with st.container(border=True):
