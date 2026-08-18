@@ -253,46 +253,47 @@ tab_predict, tab_how, tab_docs = st.tabs(
 
 
 with tab_predict:
-    with st.form("customer_form"):
-        left, right = st.columns(2)
+    st.html('<div class="section-badge">:material/edit: ENTER CUSTOMER DETAILS</div>')
 
-        with left:
-            with st.container(border=True):
-                st.markdown("**:material/person: Customer profile**")
-                gender = st.selectbox("Gender", ["Female", "Male"])
-                senior_citizen = st.selectbox("Senior citizen", ["No", "Yes"])
-                partner = st.selectbox("Has partner", ["No", "Yes"])
-                dependents = st.selectbox("Has dependents", ["No", "Yes"])
-                tenure = st.slider("Tenure (months)", min_value=0, max_value=72, value=12)
+    left, right = st.columns(2)
 
-            with st.container(border=True):
-                st.markdown("**:material/phone: Phone and internet**")
-                phone_service = st.selectbox("Phone service", ["Yes", "No"])
-                multiple_lines = st.selectbox("Multiple lines", ["No", "Yes", "No phone service"])
-                internet_service = st.selectbox("Internet service", ["DSL", "Fiber optic", "No"])
-                online_security = st.selectbox("Online security", ["No", "Yes", "No internet service"])
-                online_backup = st.selectbox("Online backup", ["No", "Yes", "No internet service"])
+    with left:
+        with st.container(border=True):
+            st.markdown("**:material/person: Customer profile**")
+            gender = st.selectbox("Gender", ["Female", "Male"])
+            senior_citizen = st.selectbox("Senior citizen", ["No", "Yes"])
+            partner = st.selectbox("Has partner", ["No", "Yes"])
+            dependents = st.selectbox("Has dependents", ["No", "Yes"])
+            tenure = st.slider("Tenure (months)", min_value=0, max_value=72, value=12)
 
-        with right:
-            with st.container(border=True):
-                st.markdown("**:material/devices: Support and streaming**")
-                device_protection = st.selectbox("Device protection", ["No", "Yes", "No internet service"])
-                tech_support = st.selectbox("Tech support", ["No", "Yes", "No internet service"])
-                streaming_tv = st.selectbox("Streaming TV", ["No", "Yes", "No internet service"])
-                streaming_movies = st.selectbox("Streaming movies", ["No", "Yes", "No internet service"])
+        with st.container(border=True):
+            st.markdown("**:material/phone: Phone and internet**")
+            phone_service = st.selectbox("Phone service", ["Yes", "No"])
+            multiple_lines = st.selectbox("Multiple lines", ["No", "Yes", "No phone service"])
+            internet_service = st.selectbox("Internet service", ["DSL", "Fiber optic", "No"])
+            online_security = st.selectbox("Online security", ["No", "Yes", "No internet service"])
+            online_backup = st.selectbox("Online backup", ["No", "Yes", "No internet service"])
 
-            with st.container(border=True):
-                st.markdown("**:material/receipt_long: Plan and billing**")
-                contract = st.selectbox("Contract", ["Month-to-month", "One year", "Two year"])
-                paperless_billing = st.selectbox("Paperless billing", ["Yes", "No"])
-                payment_method = st.selectbox(
-                    "Payment method",
-                    ["Electronic check", "Mailed check", "Bank transfer (automatic)", "Credit card (automatic)"],
-                )
-                monthly_charges = st.number_input("Monthly charges ($)", min_value=0.0, max_value=200.0, value=70.0, step=0.5)
-                total_charges = st.number_input("Total charges ($)", min_value=0.0, max_value=10000.0, value=840.0, step=1.0)
+    with right:
+        with st.container(border=True):
+            st.markdown("**:material/devices: Support and streaming**")
+            device_protection = st.selectbox("Device protection", ["No", "Yes", "No internet service"])
+            tech_support = st.selectbox("Tech support", ["No", "Yes", "No internet service"])
+            streaming_tv = st.selectbox("Streaming TV", ["No", "Yes", "No internet service"])
+            streaming_movies = st.selectbox("Streaming movies", ["No", "Yes", "No internet service"])
 
-        submitted = st.form_submit_button(":material/send: Predict churn risk", type="primary", use_container_width=True)
+        with st.container(border=True):
+            st.markdown("**:material/receipt_long: Plan and billing**")
+            contract = st.selectbox("Contract", ["Month-to-month", "One year", "Two year"])
+            paperless_billing = st.selectbox("Paperless billing", ["Yes", "No"])
+            payment_method = st.selectbox(
+                "Payment method",
+                ["Electronic check", "Mailed check", "Bank transfer (automatic)", "Credit card (automatic)"],
+            )
+            monthly_charges = st.number_input("Monthly charges ($)", min_value=0.0, max_value=200.0, value=70.0, step=0.5)
+            total_charges = st.number_input("Total charges ($)", min_value=0.0, max_value=10000.0, value=840.0, step=1.0)
+
+    submitted = st.button(":material/send: Predict churn risk", type="primary", use_container_width=True)
 
     if submitted:
         customer = pd.DataFrame(
