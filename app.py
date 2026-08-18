@@ -222,7 +222,7 @@ st.html(ANIMATED_CSS)
 
 st.html("""
 <div class="hero-banner">
-    <h1>:material/analytics: Telecom customer churn predictor</h1>
+    <h1>Telecom customer churn predictor</h1>
     <p>Estimate whether a customer will cancel their subscription next month using machine learning.</p>
 </div>
 """)
