@@ -27,6 +27,152 @@ MODEL_PATH = Path("telco_churn_model.joblib")
 RANDOM_STATE = 42
 
 
+ANIMATED_CSS = """
+<style>
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+}
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+.hero-banner {
+    background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 30%, #A78BFA 60%, #6366F1 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 6s ease infinite;
+    border-radius: 16px;
+    padding: 2.5rem 3rem;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+.hero-banner h1 {
+    color: white !important;
+    font-size: 2.2rem !important;
+    margin-bottom: 0.3rem !important;
+    animation: fadeInUp 0.8s ease-out;
+}
+.hero-banner p {
+    color: rgba(255,255,255,0.9) !important;
+    font-size: 1.1rem !important;
+    animation: fadeInUp 1s ease-out 0.2s both;
+}
+.fade-in {
+    animation: fadeInUp 0.6s ease-out both;
+}
+.fade-in-delay-1 { animation-delay: 0.1s; }
+.fade-in-delay-2 { animation-delay: 0.2s; }
+.fade-in-delay-3 { animation-delay: 0.3s; }
+.fade-in-delay-4 { animation-delay: 0.4s; }
+.pulse-card:hover {
+    animation: pulse 0.6s ease;
+}
+.float-icon {
+    animation: float 3s ease-in-out infinite;
+    display: inline-block;
+    font-size: 2.5rem;
+}
+.pipeline-step {
+    background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+    border-left: 4px solid #6366F1;
+    border-radius: 8px;
+    padding: 1.2rem 1.5rem;
+    margin: 0.8rem 0;
+    animation: slideInLeft 0.5s ease-out both;
+}
+.pipeline-step:nth-child(1) { animation-delay: 0.1s; }
+.pipeline-step:nth-child(2) { animation-delay: 0.25s; }
+.pipeline-step:nth-child(3) { animation-delay: 0.4s; }
+.pipeline-step:nth-child(4) { animation-delay: 0.55s; }
+.pipeline-step:nth-child(5) { animation-delay: 0.7s; }
+.risk-high {
+    background: linear-gradient(135deg, #FEF2F2, #FEE2E2);
+    border-left: 4px solid #EF4444;
+    border-radius: 10px;
+    padding: 1.5rem;
+    animation: pulse 2s ease-in-out infinite;
+}
+.risk-medium {
+    background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
+    border-left: 4px solid #F59E0B;
+    border-radius: 10px;
+    padding: 1.5rem;
+    animation: pulse 2.5s ease-in-out infinite;
+}
+.risk-low {
+    background: linear-gradient(135deg, #F0FDF4, #DCFCE7);
+    border-left: 4px solid #10B981;
+    border-radius: 10px;
+    padding: 1.5rem;
+    animation: pulse 3s ease-in-out infinite;
+}
+.stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid #E2E8F0;
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.6s ease-out both;
+}
+.stat-card:hover {
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.15);
+    transform: translateY(-2px);
+}
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #6366F1;
+    line-height: 1.2;
+}
+.stat-label {
+    font-size: 0.85rem;
+    color: #64748B;
+    margin-top: 0.3rem;
+}
+.flow-arrow {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #6366F1;
+    animation: float 2s ease-in-out infinite;
+    padding: 0.3rem 0;
+}
+.section-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #6366F1, #8B5CF6);
+    color: white;
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    animation: fadeIn 0.8s ease-out;
+}
+</style>
+"""
+
+
 @st.cache_resource
 def load_or_train_model():
     """Load the saved pipeline, or train one from the included CSV once."""
@@ -71,8 +217,16 @@ except Exception as error:
     st.stop()
 
 
-st.title(":material/analytics: Telecom customer churn predictor")
-st.caption("Estimate whether a customer will cancel their subscription next month.")
+st.html(ANIMATED_CSS)
+
+
+st.html("""
+<div class="hero-banner">
+    <h1>:material/analytics: Telecom customer churn predictor</h1>
+    <p>Estimate whether a customer will cancel their subscription next month using machine learning.</p>
+</div>
+""")
+
 
 with st.sidebar:
     st.header(":material/info: About")
@@ -86,6 +240,12 @@ with st.sidebar:
 - :orange-badge[Medium] 35% - 59%
 - :green-badge[Low] Below 35%"""
     )
+
+    st.markdown("---")
+    st.markdown("**:material/link: Quick links**")
+    st.markdown("[GitHub repo](https://github.com/MubiKhanKhattak/telco-churn-predictor)")
+    st.markdown("[Live app](https://telco-churn-predictor.streamlit.app)")
+
 
 tab_predict, tab_how, tab_docs = st.tabs(
     [":material/edit: Predict", ":material/science: How it works", ":material/article: Documentation"]
@@ -164,95 +324,137 @@ with tab_predict:
         percentage = probability * 100
 
         if probability >= 0.60:
-            level, icon, color, message = "High", ":material/warning:", "red", "Prioritize this customer for retention outreach and a tailored offer."
+            level, icon, message, css_class = "High", ":material/warning:", "Prioritize this customer for retention outreach and a tailored offer.", "risk-high"
         elif probability >= 0.35:
-            level, icon, color, message = "Medium", ":material/info:", "orange", "Consider proactive outreach, especially if the customer has recently contacted support."
+            level, icon, message, css_class = "Medium", ":material/info:", "Consider proactive outreach, especially if the customer has recently contacted support.", "risk-medium"
         else:
-            level, icon, color, message = "Low", ":material/check_circle:", "green", "No immediate retention action is indicated by this model."
+            level, icon, message, css_class = "Low", ":material/check_circle:", "No immediate retention action is indicated by this model.", "risk-low"
 
         st.space("medium")
 
-        with st.container(border=True):
-            st.subheader(f"{icon} {level} churn risk")
-            c1, c2 = st.columns([1, 2])
-            with c1:
-                st.metric("Predicted churn probability", f"{percentage:.1f}%")
-                st.progress(int(round(percentage)))
-            with c2:
-                st.write(message)
-                with st.expander(":material/table_chart: View submitted customer data"):
-                    st.dataframe(customer, use_container_width=True, hide_index=True)
+        st.html(f"""
+        <div class="{css_class}">
+            <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.8rem;">
+                <span class="float-icon">{icon.replace(':material/', '').replace(':', '')}</span>
+                <h3 style="margin:0;">{level} churn risk</h3>
+            </div>
+            <div style="display:flex;gap:2rem;align-items:center;flex-wrap:wrap;">
+                <div>
+                    <div class="stat-number">{percentage:.1f}%</div>
+                    <div class="stat-label">Predicted churn probability</div>
+                </div>
+                <div style="flex:1;min-width:200px;">
+                    <p style="margin:0;color:#475569;">{message}</p>
+                </div>
+            </div>
+        </div>
+        """)
+
+        with st.expander(":material/table_chart: View submitted customer data"):
+            st.dataframe(customer, use_container_width=True, hide_index=True)
 
 
 with tab_how:
-    st.subheader(":material/science: How the model works")
+    st.html('<div class="section-badge">:material/science: MODEL EXPLAINED</div>')
+    st.subheader("How the model works")
 
-    with st.container(border=True):
-        st.markdown(
-            """### Data pipeline
+    st.html("""
+    <div class="pipeline-step fade-in">
+        <h4 style="margin:0 0 0.5rem 0;color:#6366F1;">:material/input: Step 1: Raw customer data</h4>
+        <p style="margin:0;color:#475569;">18 customer attributes are collected: profile info, services, and billing details.</p>
+    </div>
+    <div class="flow-arrow">:material/arrow_downward:</div>
+    <div class="pipeline-step fade-in fade-in-delay-1">
+        <h4 style="margin:0 0 0.5rem 0;color:#6366F1;">:material/build: Step 2: Preprocessing</h4>
+        <p style="margin:0;color:#475569;">Missing values are imputed (median for numeric, most frequent for categorical). Numeric features are standardized. Categorical features are one-hot encoded.</p>
+    </div>
+    <div class="flow-arrow">:material/arrow_downward:</div>
+    <div class="pipeline-step fade-in fade-in-delay-2">
+        <h4 style="margin:0 0 0.5rem 0;color:#6366F1;">:material/smart_toy: Step 3: Model training</h4>
+        <p style="margin:0;color:#475569;">Logistic Regression with balanced class weights learns the relationship between features and churn. Random Forest is also compared as an alternative.</p>
+    </div>
+    <div class="flow-arrow">:material/arrow_downward:</div>
+    <div class="pipeline-step fade-in fade-in-delay-3">
+        <h4 style="margin:0 0 0.5rem 0;color:#6366F1;">:material/bar_chart: Step 4: Evaluation</h4>
+        <p style="margin:0;color:#475569;">The best model is selected by ROC-AUC. Classification report, confusion matrix, and ROC curve validate performance on unseen data.</p>
+    </div>
+    <div class="flow-arrow">:material/arrow_downward:</div>
+    <div class="pipeline-step fade-in fade-in-delay-4">
+        <h4 style="margin:0 0 0.5rem 0;color:#6366F1;">:material/send: Step 5: Prediction</h4>
+        <p style="margin:0;color:#475569;">The trained pipeline scores new customers and outputs a churn probability with a risk level for the retention team.</p>
+    </div>
+    """)
 
-The model uses a **scikit-learn Pipeline** that chains preprocessing and classification into a single object. This prevents data leakage because all transformations are learned from training data only."""
-        )
+    st.space("large")
+
+    st.html('<div class="section-badge">:material/analytics: KEY NUMBERS</div>')
+    st.subheader("Project at a glance")
+
+    c1, c2, c3, c4 = st.columns(4)
+    with c1:
+        st.html("""<div class="stat-card fade-in"><div class="stat-number">7,044</div><div class="stat-label">Customer records</div></div>""")
+    with c2:
+        st.html("""<div class="stat-card fade-in fade-in-delay-1"><div class="stat-number">18</div><div class="stat-label">Input features</div></div>""")
+    with c3:
+        st.html("""<div class="stat-card fade-in fade-in-delay-2"><div class="stat-number">2</div><div class="stat-label">Models compared</div></div>""")
+    with c4:
+        st.html("""<div class="stat-card fade-in fade-in-delay-3"><div class="stat-number">~0.84</div><div class="stat-label">ROC-AUC score</div></div>""")
+
+    st.space("large")
 
     c1, c2 = st.columns(2)
 
     with c1:
         with st.container(border=True):
-            st.markdown(
-                """### Preprocessing steps
-
-1. **Missing values** are filled using the median (numeric) or most frequent value (categorical)
-2. **Numeric features** are standardized with zero mean and unit variance
-3. **Categorical features** are one-hot encoded, with unknown categories handled gracefully"""
-            )
+            st.markdown("### :material/tune: Preprocessing details")
+            st.markdown("""
+            | Step | Method | Applies to |
+            |------|--------|------------|
+            | Imputation | Median | Numeric features |
+            | Imputation | Most frequent | Categorical features |
+            | Scaling | StandardScaler | Numeric features |
+            | Encoding | OneHotEncoder | Categorical features |
+            """)
 
     with c2:
         with st.container(border=True):
-            st.markdown(
-                """### Model selection
-
-Two models are compared:
-- **Logistic Regression** - interpretable baseline with balanced class weights
-- **Random Forest** - ensemble of 400 trees capturing non-linear patterns
-
-The winner is selected by **ROC-AUC**, which measures how well the model ranks churners above non-churners across all probability thresholds."""
-            )
+            st.markdown("### :material/compare: Model comparison")
+            st.markdown("""
+            | Model | Strengths | Weaknesses |
+            |-------|-----------|------------|
+            | **Logistic Regression** | Interpretable, fast, strong baseline | Linear decision boundary |
+            | **Random Forest** | Captures non-linear patterns | Less interpretable, slower |
+            """)
 
     with st.container(border=True):
-        st.markdown(
-            """### Features used
-
-The model uses **18 customer attributes** across four categories:
-
-| Category | Features |
-|----------|----------|
-| **Profile** | Gender, senior citizen, partner, dependents, tenure |
-| **Phone** | Phone service, multiple lines |
-| **Internet** | Internet service, online security, backup, device protection, tech support, streaming TV, streaming movies |
-| **Billing** | Contract type, paperless billing, payment method, monthly charges, total charges |"""
-        )
+        st.markdown("### :material/table_chart: Features used by the model")
+        st.markdown("""
+        | Category | Features |
+        |----------|----------|
+        | :material/person: **Profile** | Gender, senior citizen, partner, dependents, tenure |
+        | :material/phone: **Phone** | Phone service, multiple lines |
+        | :material/wifi: **Internet** | Internet service, online security, backup, device protection, tech support, streaming TV, streaming movies |
+        | :material/receipt_long: **Billing** | Contract type, paperless billing, payment method, monthly charges, total charges |
+        """)
 
 
 with tab_docs:
-    st.subheader(":material/article: Documentation")
+    st.html('<div class="section-badge">:material/article: FULL DOCS</div>')
+    st.subheader("Documentation")
 
     with st.container(border=True):
-        st.markdown(
-            """### Project overview
+        st.markdown("### :material/info: Project overview")
+        st.markdown("""
+        This is an end-to-end machine learning project that predicts customer churn for a telecom company. It includes data exploration, model training, evaluation, and a deployed Streamlit web application.
 
-This is an end-to-end machine learning project that predicts customer churn for a telecom company. It includes data exploration, model training, evaluation, and a deployed Streamlit web application.
+        **Tech stack:** Python, scikit-learn, Streamlit, pandas, joblib
 
-**Tech stack:** Python, scikit-learn, Streamlit, pandas, joblib
-
-**Dataset:** [IBM Telco Customer Churn](https://www.kaggle.com/datasets/blastchar/telco-customer-churn) - 7,044 customer records with 21 features."""
-        )
+        **Dataset:** [IBM Telco Customer Churn](https://www.kaggle.com/datasets/blastchar/telco-customer-churn) - 7,044 customer records with 21 features.
+        """)
 
     with st.container(border=True):
-        st.markdown(
-            """### How to run locally
-
-```bash
-# Clone the repository
+        st.markdown("### :material/terminal: How to run locally")
+        st.code("""# Clone the repository
 git clone https://github.com/MubiKhanKhattak/telco-churn-predictor.git
 cd telco-churn-predictor
 
@@ -260,72 +462,61 @@ cd telco-churn-predictor
 pip install -r requirements.txt
 
 # Start the app
-streamlit run app.py
-```"""
-        )
+streamlit run app.py""", language="bash")
 
     with st.container(border=True):
-        st.markdown(
-            """### Understanding the prediction
+        st.markdown("### :material/gauge: Understanding the prediction")
+        st.markdown("""
+        The model outputs a **churn probability** between 0% and 100%. This is interpreted as:
 
-The model outputs a **churn probability** between 0% and 100%. This is interpreted as:
+        - **High risk (60%+):** The customer has strong signals of leaving. The retention team should reach out with a tailored offer (discount, plan upgrade, service improvement).
+        - **Medium risk (35-59%):** The customer shows some churn indicators. Proactive outreach is recommended, especially if they have recently contacted support.
+        - **Low risk (below 35%):** The customer is likely to stay. No immediate action is needed, but monitoring continues.
 
-- **High risk (60%+):** The customer has strong signals of leaving. The retention team should reach out with a tailored offer (discount, plan upgrade, service improvement).
-- **Medium risk (35-59%):** The customer shows some churn indicators. Proactive outreach is recommended, especially if they have recently contacted support.
-- **Low risk (below 35%):** The customer is likely to stay. No immediate action is needed, but monitoring continues.
-
-The threshold between high/medium/low can be adjusted based on the team's budget and the cost of retention offers."""
-        )
-
-    with st.container(border=True):
-        st.markdown(
-            """### Key churn drivers
-
-Based on the logistic regression coefficients, the most influential factors are:
-
-- **Contract type:** Month-to-month contracts have the highest churn risk
-- **Tenure:** Newer customers are more likely to leave
-- **Internet service:** Fiber optic customers churn more (possibly due to price or service issues)
-- **Payment method:** Electronic check users have higher churn
-- **Tech support and online security:** Customers without these services are at higher risk
-
-These insights help the retention team prioritize which customers to contact and what offers to prepare."""
-        )
+        The threshold between high/medium/low can be adjusted based on the team's budget and the cost of retention offers.
+        """)
 
     with st.container(border=True):
-        st.markdown(
-            """### Model performance
+        st.markdown("### :material/lightbulb: Key churn drivers")
+        st.markdown("""
+        Based on the logistic regression coefficients, the most influential factors are:
 
-The model is evaluated using:
-- **ROC-AUC:** Measures ranking quality across all thresholds
-- **Precision:** Of customers predicted to churn, how many actually did
-- **Recall:** Of customers who actually churned, how many were identified
-- **F1-score:** Harmonic mean of precision and recall
+        - **:material/gavel: Contract type:** Month-to-month contracts have the highest churn risk
+        - **:material/schedule: Tenure:** Newer customers are more likely to leave
+        - **:material/wifi: Internet service:** Fiber optic customers churn more (possibly due to price or service issues)
+        - **:material/credit_card: Payment method:** Electronic check users have higher churn
+        - **:material/shield: Tech support and online security:** Customers without these services are at higher risk
 
-For retention use cases, **churn recall** is particularly valuable because it measures how many at-risk customers the team can identify."""
-        )
-
-    with st.container(border=True):
-        st.markdown(
-            """### Retention list
-
-After evaluation, the model produces a **prioritized retention list** for the test set. Customers are ranked by churn probability, and those above 0.60 are flagged as high priority. This list helps the retention team allocate their outreach budget efficiently.
-
-The list is saved as `retention_priority_list.csv` during training."""
-        )
+        These insights help the retention team prioritize which customers to contact and what offers to prepare.
+        """)
 
     with st.container(border=True):
-        st.markdown(
-            """### Project structure
+        st.markdown("### :material/emoji_events: Model performance")
+        st.markdown("""
+        The model is evaluated using:
+        - **ROC-AUC:** Measures ranking quality across all thresholds
+        - **Precision:** Of customers predicted to churn, how many actually did
+        - **Recall:** Of customers who actually churned, how many were identified
+        - **F1-score:** Harmonic mean of precision and recall
 
-```
-telco-churn-predictor/
+        For retention use cases, **churn recall** is particularly valuable because it measures how many at-risk customers the team can identify.
+        """)
+
+    with st.container(border=True):
+        st.markdown("### :material/list: Retention list")
+        st.markdown("""
+        After evaluation, the model produces a **prioritized retention list** for the test set. Customers are ranked by churn probability, and those above 0.60 are flagged as high priority. This list helps the retention team allocate their outreach budget efficiently.
+
+        The list is saved as `retention_priority_list.csv` during training.
+        """)
+
+    with st.container(border=True):
+        st.markdown("### :material/folder: Project structure")
+        st.code("""telco-churn-predictor/
   app.py                              Streamlit web app
   main.py                             ML training script
   telco_churn_kaggle.ipynb            Kaggle notebook
   telco_churn_prediction.ipynb        Local notebook
   archive/                            Dataset CSV
   requirements.txt                    Dependencies
-  README.md                           Project docs
-```"""
-        )
+  README.md                           Project docs""", language="text")
