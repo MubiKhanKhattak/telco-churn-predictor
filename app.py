@@ -236,10 +236,22 @@ with st.sidebar:
     </div>
     """)
 
-    st.markdown("#### :material/info: About")
-    st.write(
-        "A decision-support signal for retention teams — not an automatic decision."
-    )
+    st.html("""
+    <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:10px;padding:1rem 1rem 0.8rem 1rem;margin-bottom:0.5rem;">
+        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.6rem;">
+            <span style="font-size:1.3rem;">&#128202;</span>
+            <span style="font-size:0.95rem;font-weight:600;color:#1E293B;">About this tool</span>
+        </div>
+        <p style="margin:0 0 0.7rem 0;font-size:0.82rem;color:#475569;line-height:1.5;">Predicts customer churn using a trained Logistic Regression model on 7,044 telecom records.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
+            <span style="background:#EEF2FF;color:#4F46E5;font-size:0.7rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:12px;">Python</span>
+            <span style="background:#EEF2FF;color:#4F46E5;font-size:0.7rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:12px;">scikit-learn</span>
+            <span style="background:#EEF2FF;color:#4F46E5;font-size:0.7rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:12px;">Streamlit</span>
+            <span style="background:#EEF2FF;color:#4F46E5;font-size:0.7rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:12px;">pandas</span>
+            <span style="background:#EEF2FF;color:#4F46E5;font-size:0.7rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:12px;">joblib</span>
+        </div>
+    </div>
+    """)
 
     st.markdown("---")
 
