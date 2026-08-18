@@ -58,42 +58,102 @@ ANIMATED_CSS = """
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-6px); }
 }
+@keyframes drift {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(10px, -8px) rotate(2deg); }
+    66% { transform: translate(-5px, 5px) rotate(-1deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* ── Hero with telecom network SVG ── */
 .hero-banner {
-    background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 30%, #A78BFA 60%, #6366F1 100%);
-    background-size: 200% 200%;
-    animation: gradientShift 6s ease infinite;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #4338CA 0%, #6366F1 25%, #8B5CF6 50%, #6366F1 75%, #4338CA 100%);
+    background-size: 300% 300%;
+    animation: gradientShift 8s ease infinite;
     border-radius: 16px;
     padding: 2.5rem 3rem;
     margin-bottom: 1.5rem;
     color: white;
+}
+.hero-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cg fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='1.5'%3E%3Ccircle cx='80' cy='80' r='25'/%3E%3Ccircle cx='200' cy='60' r='18'/%3E%3Ccircle cx='320' cy='100' r='22'/%3E%3Ccircle cx='140' cy='200' r='30'/%3E%3Ccircle cx='300' cy='250' r='20'/%3E%3Ccircle cx='60' cy='320' r='15'/%3E%3Ccircle cx='220' cy='340' r='24'/%3E%3Ccircle cx='360' cy='360' r='12'/%3E%3Cline x1='80' y1='80' x2='200' y2='60'/%3E%3Cline x1='200' y1='60' x2='320' y2='100'/%3E%3Cline x1='80' y1='80' x2='140' y2='200'/%3E%3Cline x1='320' y1='100' x2='300' y2='250'/%3E%3Cline x1='140' y1='200' x2='300' y2='250'/%3E%3Cline x1='140' y1='200' x2='60' y2='320'/%3E%3Cline x1='300' y1='250' x2='220' y2='340'/%3E%3Cline x1='60' y1='320' x2='220' y2='340'/%3E%3C/g%3E%3Cg fill='rgba(255,255,255,0.12)'%3E%3Ccircle cx='80' cy='80' r='4'/%3E%3Ccircle cx='200' cy='60' r='3'/%3E%3Ccircle cx='320' cy='100' r='3.5'/%3E%3Ccircle cx='140' cy='200' r='5'/%3E%3Ccircle cx='300' cy='250' r='3.5'/%3E%3Ccircle cx='60' cy='320' r='3'/%3E%3Ccircle cx='220' cy='340' r='4'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 400px 400px;
+    animation: drift 20s ease-in-out infinite;
+    pointer-events: none;
 }
 .hero-banner h1 {
     color: white !important;
     font-size: 2.2rem !important;
     margin-bottom: 0.3rem !important;
     animation: fadeInUp 0.8s ease-out;
+    position: relative;
+    z-index: 1;
 }
 .hero-banner p {
     color: rgba(255,255,255,0.9) !important;
     font-size: 1.1rem !important;
     animation: fadeInUp 1s ease-out 0.2s both;
+    position: relative;
+    z-index: 1;
 }
-.fade-in {
+
+/* ── Scenario problem card ── */
+.scenario-problem {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #FFF1F2, #FFE4E6);
+    border-radius: 12px;
+    padding: 1.5rem 1.8rem;
+    border-left: 5px solid #E11D48;
     animation: fadeInUp 0.6s ease-out both;
 }
-.fade-in-delay-1 { animation-delay: 0.1s; }
-.fade-in-delay-2 { animation-delay: 0.2s; }
-.fade-in-delay-3 { animation-delay: 0.3s; }
-.fade-in-delay-4 { animation-delay: 0.4s; }
-.pulse-card:hover {
-    animation: pulse 0.6s ease;
+.scenario-problem::after {
+    content: '';
+    position: absolute;
+    right: 15px;
+    bottom: 10px;
+    width: 120px;
+    height: 120px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='rgba(225,29,72,0.1)' stroke-width='2'%3E%3Cpath d='M60 10 L60 30 M60 90 L60 110 M10 60 L30 60 M90 60 L110 60'/%3E%3Ccircle cx='60' cy='60' r='35'/%3E%3Ccircle cx='60' cy='60' r='20'/%3E%3Cpath d='M45 50 L55 65 L75 45' stroke-width='3' stroke='%23E11D48' opacity='0.2'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.6;
+    pointer-events: none;
 }
-.float-icon {
-    animation: float 3s ease-in-out infinite;
-    display: inline-block;
-    font-size: 2.5rem;
+
+/* ── Scenario solution card ── */
+.scenario-solution {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ECFDF5, #D1FAE5);
+    border-radius: 12px;
+    padding: 1.5rem 1.8rem;
+    border-left: 5px solid #10B981;
+    animation: fadeInUp 0.6s ease-out 0.15s both;
 }
+.scenario-solution::after {
+    content: '';
+    position: absolute;
+    right: 15px;
+    bottom: 10px;
+    width: 120px;
+    height: 120px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='rgba(16,185,129,0.1)' stroke-width='2'%3E%3Ccircle cx='60' cy='60' r='40'/%3E%3Ccircle cx='60' cy='60' r='25'/%3E%3Cpath d='M42 60 L55 73 L78 47' stroke-width='4' stroke='%2310B981' opacity='0.25'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* ── Pipeline steps with data-flow SVG ── */
 .pipeline-step {
+    position: relative;
+    overflow: hidden;
     background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
     border-left: 4px solid #6366F1;
     border-radius: 8px;
@@ -101,33 +161,94 @@ ANIMATED_CSS = """
     margin: 0.8rem 0;
     animation: slideInLeft 0.5s ease-out both;
 }
+.pipeline-step::after {
+    content: '';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 80px;
+    height: 80px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='rgba(99,102,241,0.08)' stroke-width='1.5'%3E%3Crect x='10' y='10' width='20' height='20' rx='3'/%3E%3Crect x='50' y='10' width='20' height='20' rx='3'/%3E%3Crect x='30' y='50' width='20' height='20' rx='3'/%3E%3Cline x1='30' y1='20' x2='50' y2='20'/%3E%3Cline x1='40' y1='30' x2='40' y2='50'/%3E%3Ccircle cx='40' cy='20' r='2' fill='rgba(99,102,241,0.15)'/%3E%3Ccircle cx='40' cy='40' r='2' fill='rgba(99,102,241,0.15)'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;
+}
 .pipeline-step:nth-child(1) { animation-delay: 0.1s; }
-.pipeline-step:nth-child(2) { animation-delay: 0.25s; }
-.pipeline-step:nth-child(3) { animation-delay: 0.4s; }
-.pipeline-step:nth-child(4) { animation-delay: 0.55s; }
-.pipeline-step:nth-child(5) { animation-delay: 0.7s; }
+.pipeline-step:nth-child(3) { animation-delay: 0.25s; }
+.pipeline-step:nth-child(5) { animation-delay: 0.4s; }
+.pipeline-step:nth-child(7) { animation-delay: 0.55s; }
+.pipeline-step:nth-child(9) { animation-delay: 0.7s; }
+
+/* ── Risk cards with themed SVGs ── */
 .risk-high {
+    position: relative;
+    overflow: hidden;
     background: linear-gradient(135deg, #FEF2F2, #FEE2E2);
     border-left: 4px solid #EF4444;
     border-radius: 10px;
     padding: 1.5rem;
     animation: pulse 2s ease-in-out infinite;
 }
+.risk-high::after {
+    content: '';
+    position: absolute;
+    right: 10px;
+    bottom: 8px;
+    width: 100px;
+    height: 100px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='rgba(239,68,68,0.1)' stroke-width='2'%3E%3Cpath d='M50 15 L85 80 H15 Z'/%3E%3Ccircle cx='50' cy='55' r='4'/%3E%3Cline x1='50' y1='35' x2='50' y2='48'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;
+}
 .risk-medium {
+    position: relative;
+    overflow: hidden;
     background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
     border-left: 4px solid #F59E0B;
     border-radius: 10px;
     padding: 1.5rem;
     animation: pulse 2.5s ease-in-out infinite;
 }
+.risk-medium::after {
+    content: '';
+    position: absolute;
+    right: 10px;
+    bottom: 8px;
+    width: 100px;
+    height: 100px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='rgba(245,158,11,0.12)' stroke-width='2'%3E%3Ccircle cx='50' cy='50' r='35'/%3E%3Cline x1='50' y1='30' x2='50' y2='55'/%3E%3Ccircle cx='50' cy='67' r='3.5'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;
+}
 .risk-low {
+    position: relative;
+    overflow: hidden;
     background: linear-gradient(135deg, #F0FDF4, #DCFCE7);
     border-left: 4px solid #10B981;
     border-radius: 10px;
     padding: 1.5rem;
     animation: pulse 3s ease-in-out infinite;
 }
+.risk-low::after {
+    content: '';
+    position: absolute;
+    right: 10px;
+    bottom: 8px;
+    width: 100px;
+    height: 100px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='rgba(16,185,129,0.12)' stroke-width='2'%3E%3Ccircle cx='50' cy='50' r='35'/%3E%3Cpath d='M35 50 L45 62 L68 38' stroke-width='3.5'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;
+}
+
+/* ── Stat cards ── */
 .stat-card {
+    position: relative;
+    overflow: hidden;
     background: white;
     border-radius: 12px;
     padding: 1.5rem;
@@ -135,6 +256,18 @@ ANIMATED_CSS = """
     border: 1px solid #E2E8F0;
     transition: all 0.3s ease;
     animation: fadeInUp 0.6s ease-out both;
+}
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 80px;
+    height: 80px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='rgba(99,102,241,0.06)' stroke-width='1.5'%3E%3Ccircle cx='40' cy='40' r='30'/%3E%3Ccircle cx='40' cy='40' r='18'/%3E%3Ccircle cx='40' cy='40' r='6'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;
 }
 .stat-card:hover {
     box-shadow: 0 8px 25px rgba(99, 102, 241, 0.15);
@@ -151,6 +284,8 @@ ANIMATED_CSS = """
     color: #64748B;
     margin-top: 0.3rem;
 }
+
+/* ── Flow arrows ── */
 .flow-arrow {
     text-align: center;
     font-size: 1.5rem;
@@ -158,6 +293,8 @@ ANIMATED_CSS = """
     animation: float 2s ease-in-out infinite;
     padding: 0.3rem 0;
 }
+
+/* ── Section badges ── */
 .section-badge {
     display: inline-block;
     background: linear-gradient(135deg, #6366F1, #8B5CF6);
@@ -168,6 +305,20 @@ ANIMATED_CSS = """
     font-weight: 600;
     margin-bottom: 0.8rem;
     animation: fadeIn 0.8s ease-out;
+}
+
+/* ── Fade-in utilities ── */
+.fade-in { animation: fadeInUp 0.6s ease-out both; }
+.fade-in-delay-1 { animation-delay: 0.1s; }
+.fade-in-delay-2 { animation-delay: 0.2s; }
+.fade-in-delay-3 { animation-delay: 0.3s; }
+.fade-in-delay-4 { animation-delay: 0.4s; }
+
+/* ── Float icon ── */
+.float-icon {
+    animation: float 3s ease-in-out infinite;
+    display: inline-block;
+    font-size: 2.5rem;
 }
 </style>
 """
@@ -237,18 +388,19 @@ with st.sidebar:
     """)
 
     st.html("""
-    <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:10px;padding:1rem 1rem 0.8rem 1rem;margin-bottom:0.5rem;">
-        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.6rem;">
+    <div style="position:relative;overflow:hidden;background:linear-gradient(135deg,#F0F1FE,#EDE9FE);border:1px solid #DDD6FE;border-radius:12px;padding:1.2rem 1rem 0.8rem 1rem;margin-bottom:0.5rem;">
+        <div style="position:absolute;right:-10px;top:-10px;width:90px;height:90px;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90'%3E%3Cg fill='none' stroke='rgba(99,102,241,0.07)' stroke-width='1.5'%3E%3Ccircle cx='45' cy='45' r='35'/%3E%3Ccircle cx='45' cy='45' r='20'/%3E%3Ccircle cx='45' cy='45' r='8'/%3E%3Cline x1='45' y1='10' x2='45' y2='25'/%3E%3Cline x1='45' y1='65' x2='45' y2='80'/%3E%3Cline x1='10' y1='45' x2='25' y2='45'/%3E%3Cline x1='65' y1='45' x2='80' y2='45'/%3E%3C/g%3E%3C/svg%3E&quot;);background-size:contain;background-repeat:no-repeat;pointer-events:none;"></div>
+        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.6rem;position:relative;z-index:1;">
             <span style="font-size:1.3rem;">&#128202;</span>
             <span style="font-size:0.95rem;font-weight:600;color:#1E293B;">About this tool</span>
         </div>
-        <p style="margin:0 0 0.7rem 0;font-size:0.82rem;color:#475569;line-height:1.5;">Predicts customer churn using a trained Logistic Regression model on 7,044 telecom records.</p>
-        <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
-            <span style="background:#EEF2FF;color:#4F46E5;font-size:0.7rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:12px;">Python</span>
-            <span style="background:#EEF2FF;color:#4F46E5;font-size:0.7rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:12px;">scikit-learn</span>
-            <span style="background:#EEF2FF;color:#4F46E5;font-size:0.7rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:12px;">Streamlit</span>
-            <span style="background:#EEF2FF;color:#4F46E5;font-size:0.7rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:12px;">pandas</span>
-            <span style="background:#EEF2FF;color:#4F46E5;font-size:0.7rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:12px;">joblib</span>
+        <p style="margin:0 0 0.7rem 0;font-size:0.82rem;color:#475569;line-height:1.5;position:relative;z-index:1;">Predicts customer churn using a trained Logistic Regression model on 7,044 telecom records.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.4rem;position:relative;z-index:1;">
+            <span style="background:rgba(99,102,241,0.1);color:#4F46E5;font-size:0.7rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:12px;">Python</span>
+            <span style="background:rgba(99,102,241,0.1);color:#4F46E5;font-size:0.7rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:12px;">scikit-learn</span>
+            <span style="background:rgba(99,102,241,0.1);color:#4F46E5;font-size:0.7rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:12px;">Streamlit</span>
+            <span style="background:rgba(99,102,241,0.1);color:#4F46E5;font-size:0.7rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:12px;">pandas</span>
+            <span style="background:rgba(99,102,241,0.1);color:#4F46E5;font-size:0.7rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:12px;">joblib</span>
         </div>
     </div>
     """)
@@ -300,6 +452,28 @@ tab_predict, tab_how, tab_docs = st.tabs(
 
 with tab_predict:
     st.html('<div class="section-badge">:material/edit: ENTER CUSTOMER DETAILS</div>')
+
+    sc1, sc2 = st.columns(2)
+    with sc1:
+        st.html("""
+        <div class="scenario-problem">
+            <div style="position:relative;z-index:1;">
+                <h4 style="margin:0 0 0.4rem 0;color:#BE123C;">&#9888; The Problem</h4>
+                <p style="margin:0;font-size:0.88rem;color:#9F1239;line-height:1.55;">Telecom companies lose <strong>billions annually</strong> when customers cancel. Identifying at-risk customers <em>before</em> they leave is critical — but manual outreach is slow and wasteful.</p>
+            </div>
+        </div>
+        """)
+    with sc2:
+        st.html("""
+        <div class="scenario-solution">
+            <div style="position:relative;z-index:1;">
+                <h4 style="margin:0 0 0.4rem 0;color:#047857;">&#10003; The Solution</h4>
+                <p style="margin:0;font-size:0.88rem;color:#065F46;line-height:1.55;">A <strong>machine learning model</strong> scores each customer's churn probability. The retention team can then focus offers and outreach on those most likely to leave.</p>
+            </div>
+        </div>
+        """)
+
+    st.space("small")
 
     left, right = st.columns(2)
 
